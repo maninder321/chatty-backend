@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "219wzuprWh2Nd5FQAVPVlH2MUATdn7wfUV3Nt0RQDI0=",
+  "Source": "chatty-backend",
+  "BasePath": "_content/chatty-backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
