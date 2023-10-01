@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chatty.ApplicationCore\Chatty.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Chatty.Infrastructure\Chatty.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
