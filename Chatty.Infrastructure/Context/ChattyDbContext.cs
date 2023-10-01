@@ -10,10 +10,9 @@ namespace Chatty.Infrastructure.Context;
 public class ChattyDbContext : DbContext
 {
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ChattyDbContext(DbContextOptions<ChattyDbContext> options) : base(options)
     {
-        optionsBuilder.UseMySQL("server=localhost;database=library;user=user;password=password");
-    }
 
+    }
 
 }
