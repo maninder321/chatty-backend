@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chatty.Infrastructure.Migrations
 {
     [DbContext(typeof(ChattyDbContext))]
-    [Migration("20231007053158_chatty_user_table")]
-    partial class chatty_user_table
+    [Migration("20231007155154_chatty_users_table")]
+    partial class chatty_users_table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,7 @@ namespace Chatty.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChattyUsers");
+                    b.ToTable("chatty_users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

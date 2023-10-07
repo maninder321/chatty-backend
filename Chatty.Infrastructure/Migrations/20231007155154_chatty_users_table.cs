@@ -7,13 +7,13 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace Chatty.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class chatty_user_table : Migration
+    public partial class chatty_users_table : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ChattyUsers",
+                name: "chatty_users",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -30,7 +30,7 @@ namespace Chatty.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChattyUsers", x => x.id);
+                    table.PrimaryKey("PK_chatty_users", x => x.id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
         }
@@ -39,7 +39,7 @@ namespace Chatty.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChattyUsers");
+                name: "chatty_users");
         }
     }
 }

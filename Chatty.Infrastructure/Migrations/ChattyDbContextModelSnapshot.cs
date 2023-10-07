@@ -68,7 +68,7 @@ namespace Chatty.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChattyUsers");
+                    b.ToTable("chatty_users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

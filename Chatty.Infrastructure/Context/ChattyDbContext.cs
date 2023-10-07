@@ -18,4 +18,12 @@ public class ChattyDbContext : DbContext
 
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ChattyUser>(entitiy =>
+        {
+            entitiy.ToTable("chatty_users");
+        });
+    }
+
 }
