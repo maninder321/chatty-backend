@@ -12,6 +12,7 @@ public class ChattyDbContext : DbContext
 {
 
     public DbSet<ChattyUser> ChattyUsers { get; set; }
+    public DbSet<ChattyBrowserSession> ChattyBrowserSessions { get; set; }
 
     public ChattyDbContext(DbContextOptions<ChattyDbContext> options) : base(options)
     {
@@ -20,10 +21,17 @@ public class ChattyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         modelBuilder.Entity<ChattyUser>(entitiy =>
         {
             entitiy.ToTable("chatty_users");
         });
+
+        modelBuilder.Entity<ChattyBrowserSession>(entitiy =>
+        {
+            entitiy.ToTable("chatty_browser_sessions");
+        });
+
     }
 
 }

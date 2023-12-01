@@ -3,6 +3,7 @@ using System;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chatty.Infrastructure.Migrations
 {
     [DbContext(typeof(ChattyDbContext))]
-    partial class ChattyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231201041423_AddChattyBrowserSessionTable")]
+    partial class AddChattyBrowserSessionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

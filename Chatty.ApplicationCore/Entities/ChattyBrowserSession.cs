@@ -3,26 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Chatty.ApplicationCore.Entities;
 
-public class ChattyUser
+public class ChattyBrowserSession
 {
     [Key]
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("name")]
-    public string Name { get; set; } = null!;
-
     [Required]
-    [Column("email")]
-    public string Email { get; set; } = null!;
-
-    [Required]
-    [Column("password")]
-    public string Password { get; set; } = null!;
-
-    [Required]
-    [Column("mobile_number")]
-    public string MobileNumber { get; set; } = null!;
+    [Column("session_uuid")]
+    public string SessionUuid { get; set; } = null!;
 
     [Required]
     [Column("created_at")]
@@ -43,5 +32,4 @@ public class ChattyUser
     [Required]
     [Column("deleted")]
     public int Deleted { get; set; }
-
 }
