@@ -14,6 +14,8 @@ public class ChattyDbContext : DbContext
     public DbSet<ChattyUser> ChattyUsers { get; set; }
     public DbSet<ChattyBrowserSession> ChattyBrowserSessions { get; set; }
 
+    public DbSet<ChattySessionQrCode> ChattySessionQrCodes { get; set; }
+
     public ChattyDbContext(DbContextOptions<ChattyDbContext> options) : base(options)
     {
 
@@ -30,6 +32,11 @@ public class ChattyDbContext : DbContext
         modelBuilder.Entity<ChattyBrowserSession>(entitiy =>
         {
             entitiy.ToTable("chatty_browser_sessions");
+        });
+
+        modelBuilder.Entity<ChattySessionQrCode>(entitiy =>
+        {
+            entitiy.ToTable("chatty_session_qr_code");
         });
 
     }

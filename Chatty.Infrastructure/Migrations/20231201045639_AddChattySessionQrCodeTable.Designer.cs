@@ -3,6 +3,7 @@ using System;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chatty.Infrastructure.Migrations
 {
     [DbContext(typeof(ChattyDbContext))]
-    partial class ChattyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231201045639_AddChattySessionQrCodeTable")]
+    partial class AddChattySessionQrCodeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,52 +57,6 @@ namespace Chatty.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("chatty_browser_sessions", (string)null);
-                });
-
-            modelBuilder.Entity("Chatty.ApplicationCore.Entities.ChattySessionQrCode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    b.Property<int>("ChattyBrowserSessionId")
-                        .HasColumnType("int")
-                        .HasColumnName("chatty_browser_session_id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime>("CreatedAtGmt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("created_at_gmt");
-
-                    b.Property<int>("Deleted")
-                        .HasColumnType("int")
-                        .HasColumnName("deleted");
-
-                    b.Property<string>("QrCodeIdentifier")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("qr_code_identifier");
-
-                    b.Property<string>("QrCodeImagePath")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("qr_code_image_path");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("updated_at");
-
-                    b.Property<DateTime>("UpdatedAtGmt")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("updated_at_gmt");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("chatty_session_qr_code", (string)null);
                 });
 
             modelBuilder.Entity("Chatty.ApplicationCore.Entities.ChattyUser", b =>
