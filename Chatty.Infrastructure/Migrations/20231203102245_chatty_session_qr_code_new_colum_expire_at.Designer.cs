@@ -3,6 +3,7 @@ using System;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chatty.Infrastructure.Migrations
 {
     [DbContext(typeof(ChattyDbContext))]
-    partial class ChattyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231203102245_chatty_session_qr_code_new_colum_expire_at")]
+    partial class chatty_session_qr_code_new_colum_expire_at
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

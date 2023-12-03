@@ -38,6 +38,14 @@ public class ChattySessionQrCode
     public DateTime UpdatedAtGmt { get; set; }
 
     [Required]
+    [Column("expire_at")]
+    public DateTime ExpireAt { get; set; }
+
+    [Required]
+    [Column("expire_at_gmt")]
+    public DateTime ExpireAtGmt { get; set; }
+
+    [Required]
     [Column("deleted")]
     public int Deleted { get; set; }
 
