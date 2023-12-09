@@ -21,9 +21,17 @@ public class ChattyDbContext : DbContext
 
     }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+    {
+
+
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+
         modelBuilder.Entity<ChattyUser>(entitiy =>
         {
             entitiy.ToTable("chatty_users");
