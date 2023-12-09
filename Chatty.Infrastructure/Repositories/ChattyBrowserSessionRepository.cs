@@ -15,9 +15,25 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async Task<ChattyBrowserSession> Add(ChattyBrowserSession chattyBrowserSession)
     {
+
+        String userTimeZone = "Asia/Kolkata";
+        TimeZoneInfo timeZoneUser = TimeZoneInfo.FindSystemTimeZoneById(userTimeZone);
+        DateTime currentTimeInUserTimeZone = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneUser);
+
+        String gmtTimeZone = "GMT";
+        TimeZoneInfo timeZoneGmt = TimeZoneInfo.FindSystemTimeZoneById(gmtTimeZone);
+        DateTime currentTimeInGmt = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneGmt);
+
+        chattyBrowserSession.CreatedAt = currentTimeInUserTimeZone;
+        chattyBrowserSession.CreatedAtGmt = currentTimeInGmt;
+        chattyBrowserSession.UpdatedAt = currentTimeInUserTimeZone;
+        chattyBrowserSession.UpdatedAtGmt = currentTimeInGmt;
+        chattyBrowserSession.Deleted = 0;
+
         var result = await _context.ChattyBrowserSessions.AddAsync(chattyBrowserSession);
         await _context.SaveChangesAsync();
         return result.Entity;
+
     }
 
     public async void DeleteById(int chattyBrowserSessionId)
@@ -50,8 +66,17 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
         }
 
         result.SessionUuid = chattyBrowserSession.SessionUuid;
-        result.UpdatedAt = chattyBrowserSession.UpdatedAt;
-        result.UpdatedAtGmt = chattyBrowserSession.UpdatedAtGmt;
+
+        String userTimeZone = "Asia/Kolkata";
+        TimeZoneInfo timeZoneUser = TimeZoneInfo.FindSystemTimeZoneById(userTimeZone);
+        DateTime currentTimeInUserTimeZone = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneUser);
+
+        String gmtTimeZone = "GMT";
+        TimeZoneInfo timeZoneGmt = TimeZoneInfo.FindSystemTimeZoneById(gmtTimeZone);
+        DateTime currentTimeInGmt = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneGmt);
+
+        result.UpdatedAt = currentTimeInUserTimeZone;
+        result.UpdatedAtGmt = currentTimeInGmt;
 
         await _context.SaveChangesAsync();
 
