@@ -1,5 +1,6 @@
 ﻿using Chatty.ApplicationCore.Entities;
 using Chatty.ApplicationCore.Interfaces.Repositories;
+using Chatty.ApplicationCore.Utilities;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,18 +17,10 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
     public async Task<ChattyBrowserSession> Add(ChattyBrowserSession chattyBrowserSession)
     {
 
-        String userTimeZone = "Asia/Kolkata";
-        TimeZoneInfo timeZoneUser = TimeZoneInfo.FindSystemTimeZoneById(userTimeZone);
-        DateTime currentTimeInUserTimeZone = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneUser);
-
-        String gmtTimeZone = "GMT";
-        TimeZoneInfo timeZoneGmt = TimeZoneInfo.FindSystemTimeZoneById(gmtTimeZone);
-        DateTime currentTimeInGmt = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneGmt);
-
-        chattyBrowserSession.CreatedAt = currentTimeInUserTimeZone;
-        chattyBrowserSession.CreatedAtGmt = currentTimeInGmt;
-        chattyBrowserSession.UpdatedAt = currentTimeInUserTimeZone;
-        chattyBrowserSession.UpdatedAtGmt = currentTimeInGmt;
+        chattyBrowserSession.CreatedAt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("Asia/Kolkata");
+        chattyBrowserSession.CreatedAtGmt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("GMT");
+        chattyBrowserSession.UpdatedAt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("Asia/Kolkata");
+        chattyBrowserSession.UpdatedAtGmt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("GMT");
         chattyBrowserSession.Deleted = 0;
 
         var result = await _context.ChattyBrowserSessions.AddAsync(chattyBrowserSession);
@@ -67,16 +60,8 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
         result.SessionUuid = chattyBrowserSession.SessionUuid;
 
-        String userTimeZone = "Asia/Kolkata";
-        TimeZoneInfo timeZoneUser = TimeZoneInfo.FindSystemTimeZoneById(userTimeZone);
-        DateTime currentTimeInUserTimeZone = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneUser);
-
-        String gmtTimeZone = "GMT";
-        TimeZoneInfo timeZoneGmt = TimeZoneInfo.FindSystemTimeZoneById(gmtTimeZone);
-        DateTime currentTimeInGmt = TimeZoneInfo.ConvertTime(DateTime.Now, timeZoneGmt);
-
-        result.UpdatedAt = currentTimeInUserTimeZone;
-        result.UpdatedAtGmt = currentTimeInGmt;
+        result.UpdatedAt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("Asia/Kolkata");
+        result.UpdatedAtGmt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("GMT");
 
         await _context.SaveChangesAsync();
 
