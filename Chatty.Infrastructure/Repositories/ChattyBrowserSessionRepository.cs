@@ -22,7 +22,7 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async void DeleteById(int chattyBrowserSessionId)
     {
-        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId);
+        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId && b.Deleted == 0);
         if (result != null)
         {
             result.Deleted = 1;
@@ -42,7 +42,7 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async Task<ChattyBrowserSession?> Update(ChattyBrowserSession chattyBrowserSession)
     {
-        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSession.Id);
+        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSession.Id && b.Deleted == 0);
 
         if (result == null)
         {
