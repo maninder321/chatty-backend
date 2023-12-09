@@ -31,5 +31,5 @@ public class ChattyBrowserSession
 
     [Required]
     [Column("deleted")]
-    public int Deleted { get; set; }
+    public bool Deleted { get; set; }
 }

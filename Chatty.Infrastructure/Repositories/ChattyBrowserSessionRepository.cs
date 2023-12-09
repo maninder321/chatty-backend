@@ -3,6 +3,7 @@ using Chatty.ApplicationCore.Interfaces.Repositories;
 using Chatty.ApplicationCore.Utilities;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Chatty.Infrastructure.Repositories;
 public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
@@ -21,7 +22,6 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
         chattyBrowserSession.CreatedAtGmt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("GMT");
         chattyBrowserSession.UpdatedAt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("Asia/Kolkata");
         chattyBrowserSession.UpdatedAtGmt = CommonUtilityFunctions.GetCurrentInGivenTimeZone("GMT");
-        chattyBrowserSession.Deleted = 0;
 
         var result = await _context.ChattyBrowserSessions.AddAsync(chattyBrowserSession);
         await _context.SaveChangesAsync();
@@ -31,27 +31,27 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async void DeleteById(int chattyBrowserSessionId)
     {
-        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId && b.Deleted == 0);
+        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId && !b.Deleted);
         if (result != null)
         {
-            result.Deleted = 1;
+            Entry(result).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
     }
 
     public async Task<IEnumerable<ChattyBrowserSession>> GetAll()
     {
-        return await _context.ChattyBrowserSessions.Where(b => b.Deleted == 0).ToListAsync();
+        return await _context.ChattyBrowserSessions.Where(b => !b.Deleted).ToListAsync();
     }
 
     public async Task<ChattyBrowserSession?> GetById(int chattyBrowserSessionId)
     {
-        return await _context.ChattyBrowserSessions.Where(b => b.Deleted == 0 && b.Id == chattyBrowserSessionId).FirstOrDefaultAsync();
+        return await _context.ChattyBrowserSessions.Where(b => !b.Deleted && b.Id == chattyBrowserSessionId).FirstOrDefaultAsync();
     }
 
     public async Task<ChattyBrowserSession?> Update(ChattyBrowserSession chattyBrowserSession)
     {
-        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSession.Id && b.Deleted == 0);
+        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSession.Id && !b.Deleted);
 
         if (result == null)
         {
