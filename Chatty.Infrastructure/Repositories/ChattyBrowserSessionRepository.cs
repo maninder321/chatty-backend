@@ -34,7 +34,7 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
         var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId && !b.Deleted);
         if (result != null)
         {
-            Entry(result).State = EntityState.Deleted;
+            // Entry(result).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
     }
