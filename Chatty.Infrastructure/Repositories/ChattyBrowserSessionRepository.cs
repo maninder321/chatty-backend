@@ -40,6 +40,7 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async Task<IEnumerable<ChattyBrowserSession>> GetAll()
     {
+        Console.WriteLine("I m here");
         return await _context.ChattyBrowserSessions.Where(b => !b.Deleted).ToListAsync();
     }
 

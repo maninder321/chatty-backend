@@ -1,4 +1,6 @@
-﻿using Chatty.Infrastructure.Context;
+﻿using Chatty.ApplicationCore.Interfaces.Repositories;
+using Chatty.Infrastructure.Context;
+using Chatty.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,9 @@ public static class DependencyInjection
         {
             options.UseMySQL(Configuration.GetConnectionString("ChattyDatabase")!);
         });
+
+        services.AddScoped<IChattyBrowserSessionRepository, ChattyBrowserSessionRepository>();
+
         return services;
     }
 
