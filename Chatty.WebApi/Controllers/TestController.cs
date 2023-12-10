@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Chatty.WebApi.Controllers;
 
 [ApiController]
+[Route("test")]
 public class TestController : ControllerBase
 {
 
@@ -16,7 +17,7 @@ public class TestController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/addTest")]
+    [Route("addTest")]
     public async Task<IActionResult> Test()
     {
 
