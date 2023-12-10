@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Chatty.ApplicationCore.Entities;
+using Chatty.ApplicationCore.Interfaces.Marker;
 
 namespace Chatty.Infrastructure.Context;
 
@@ -24,7 +25,22 @@ public class ChattyDbContext : DbContext
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
     {
 
+        foreach (var entry in ChangeTracker.Entries())
+        {
 
+            if (entry.Entity is ISoftDeletable)
+            {
+                if (entry.State == EntityState.Deleted)
+                {
+                    entry.Entity.GetType().GetProperty("Deleted")?.SetValue(entry.Entity, true);
+                }
+                else if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                {
+                    entry.Entity.GetType().GetProperty("Deleted")?.SetValue(entry.Entity, false);
+                }
+            }
+
+        }
 
         return base.SaveChangesAsync(cancellationToken);
     }

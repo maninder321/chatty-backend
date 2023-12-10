@@ -3,7 +3,6 @@ using Chatty.ApplicationCore.Interfaces.Repositories;
 using Chatty.ApplicationCore.Utilities;
 using Chatty.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Chatty.Infrastructure.Repositories;
 public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
@@ -34,7 +33,7 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
         var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSessionId && !b.Deleted);
         if (result != null)
         {
-            // Entry(result).State = EntityState.Deleted;
+            _context.ChattyBrowserSessions.Remove(result);
             await _context.SaveChangesAsync();
         }
     }
@@ -51,7 +50,9 @@ public class ChattyBrowserSessionRepository : IChattyBrowserSessionRepository
 
     public async Task<ChattyBrowserSession?> Update(ChattyBrowserSession chattyBrowserSession)
     {
-        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(b => b.Id == chattyBrowserSession.Id && !b.Deleted);
+        var result = await _context.ChattyBrowserSessions.FirstOrDefaultAsync(
+            b => b.Id == chattyBrowserSession.Id && !b.Deleted
+        );
 
         if (result == null)
         {

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Chatty.ApplicationCore.Interfaces.Marker;
 
 namespace Chatty.ApplicationCore.Entities;
 
-public class ChattyBrowserSession
+public class ChattyBrowserSession : ISoftDeletable
 {
     [Key]
     [Column("id")]
