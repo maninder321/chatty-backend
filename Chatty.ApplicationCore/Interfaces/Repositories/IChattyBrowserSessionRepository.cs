@@ -3,10 +3,10 @@
 namespace Chatty.ApplicationCore.Interfaces.Repositories;
 public interface IChattyBrowserSessionRepository
 {
-    Task<IEnumerable<ChattyBrowserSession>> GetAll();
-    Task<ChattyBrowserSession?> GetById(int chattyBrowserSessionId);
-    Task<ChattyBrowserSession> Add(ChattyBrowserSession chattyBrowserSession);
-    Task<ChattyBrowserSession?> Update(ChattyBrowserSession chattyBrowserSession);
-    void DeleteById(int chattyBrowserSessionId);
+    Task<IEnumerable<ChattyBrowserSession>> GetAllAsync();
+    Task<ChattyBrowserSession?> GetByIdAsync(int chattyBrowserSessionId);
+    Task<ChattyBrowserSession> AddAsync(ChattyBrowserSession chattyBrowserSession);
+    Task<ChattyBrowserSession?> UpdateAsync(ChattyBrowserSession chattyBrowserSession);
+    Task<ChattyBrowserSession?> DeleteByIdAsync(int chattyBrowserSessionId);
 
 }

@@ -1,3 +1,4 @@
+using Chatty.ApplicationCore.Entities;
 using Chatty.ApplicationCore.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,14 +17,33 @@ public class TestController : ControllerBase
 
     [HttpGet]
     [Route("/addTest")]
-    public IActionResult Test()
+    public async Task<IActionResult> Test()
     {
 
-        var result = _chattyBrowserRepository.GetAll();
+        //var result = await _chattyBrowserRepository.DeleteByIdAsync(2);
 
-        Console.WriteLine(result);
+        //return Ok(result);
 
-        return Ok("Hello World");
+        //var chattyBrowserSession = new ChattyBrowserSession { SessionUuid = Guid.NewGuid().ToString() };
+
+        //var result = await _chattyBrowserRepository.AddAsync(chattyBrowserSession);
+
+        //return Ok(result);
+
+        var result = await _chattyBrowserRepository.GetAllAsync();
+
+        List<ChattyBrowserSession> chattyBrowserSessions = new List<ChattyBrowserSession>(result.ToArray());
+
+        Console.WriteLine("Count is " + chattyBrowserSessions.Count);
+
+
+        foreach (var session in chattyBrowserSessions)
+        {
+            Console.WriteLine(session.Id + " " + session.SessionUuid);
+        }
+
+        return Ok(chattyBrowserSessions);
+
     }
 
 }

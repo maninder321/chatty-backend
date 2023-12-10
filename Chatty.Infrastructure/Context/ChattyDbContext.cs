@@ -32,6 +32,7 @@ public class ChattyDbContext : DbContext
             {
                 if (entry.State == EntityState.Deleted)
                 {
+                    entry.State = EntityState.Modified;
                     entry.Entity.GetType().GetProperty("Deleted")?.SetValue(entry.Entity, true);
                 }
                 else if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
